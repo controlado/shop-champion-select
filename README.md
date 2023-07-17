@@ -38,5 +38,4 @@ The structure should look something like this:
         ├── 📄 index.js
         └── 📂 assets
             └── 🎨 style.css
-
 ```

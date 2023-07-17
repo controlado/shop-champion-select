@@ -16,6 +16,11 @@ class Store extends StoreBase {
             .filter(champion => !champion.owned)
             .map(champion => ({ ...champion, name: champion.name.toLowerCase() }));
     }
+
+    async getWallet() {
+        const { data } = await this.request("GET", "/storefront/v3/view/misc");
+        return { ip: data.player.ip, rp: data.player.rp };
+    }
 }
 
 class Icon {
@@ -94,16 +99,20 @@ async function setupElements(selector) {
         await sleep(500);
     }
 
+    const championSearchInput = gridHeader.querySelector(".champion-input");
+    updateInputPlaceholder(store, championSearchInput);
+    let champions = await store.getNotOwnedChampions();
+
     const icon = new Icon(store);
     gridHeader.appendChild(icon.element);
 
     const tooltip = new Tooltip("right");
     icon.element.addEventListener("mouseleave", () => tooltip.hide());
     icon.element.addEventListener("mouseenter", () => tooltip.show(icon.element));
-    icon.element.addEventListener("click", () => store.buyChampions(icon.champion)); // TODO: use `sendChatNotification`
-
-    let champions = await store.getNotOwnedChampions();
-    const championSearchInput = gridHeader.querySelector(".champion-input");
+    icon.element.addEventListener("click", async () => {
+        await store.buyChampions(icon.champion);
+        updateInputPlaceholder(store, championSearchInput);
+    });
 
     championSearchInput.addEventListener("keydown", async event => {
         if (event.key === "F5") {
@@ -129,6 +138,11 @@ async function setupElements(selector) {
             icon.hide();
         }
     });
+}
+
+async function updateInputPlaceholder(store, input) {
+    const wallet = await store.getWallet();
+    input.setAttribute("placeholder", `BE: ${wallet.ip}`);
 }
 
 addEventListener("load", () => {

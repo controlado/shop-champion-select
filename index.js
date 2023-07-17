@@ -140,7 +140,7 @@ async function setupElements(selector) {
         }
     });
 
-    championSearchInput.element.addEventListener("keydown", async event => {
+    championSearchInput.element.addEventListener("keydown", event => {
         if (event.key === "F5") {
             championSearchInput.refreshPlaceholder();
             championSearchInput.updateChampions();

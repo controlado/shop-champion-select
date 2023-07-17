@@ -118,9 +118,7 @@ async function setupElements(selector) {
     gridHeader.setAttribute("shop-champion-select", "true");
 
     const store = new Store();
-    while (!store.token) {
-        await sleep(500);
-    }
+    await store.wait(400);
 
     const championSearchInput = new Input(".champion-input", store);
     championSearchInput.refreshPlaceholder();

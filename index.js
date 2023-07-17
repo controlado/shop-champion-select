@@ -102,8 +102,17 @@ async function setupElements(selector) {
     icon.element.addEventListener("mouseenter", () => tooltip.show(icon.element));
     icon.element.addEventListener("click", () => store.buyChampions(icon.champion)); // TODO: use `sendChatNotification`
 
-    const champions = await store.getNotOwnedChampions();
+    let champions = await store.getNotOwnedChampions();
     const championSearchInput = gridHeader.querySelector(".champion-input");
+
+    championSearchInput.addEventListener("keydown", async event => {
+        if (event.key === "F5") {
+            championSearchInput.value = "";
+            champions = await store.getNotOwnedChampions();
+            console.debug("shop-champion-select: Refreshed champions");
+        }
+    });
+
     championSearchInput.addEventListener("input", () => {
         if (!championSearchInput.value) {
             icon.hide();

@@ -88,6 +88,29 @@ class Tooltip {
     }
 }
 
+class Input {
+    constructor(selector, store) {
+        this.element = document.querySelector(selector);
+        this.store = store;
+        this.champions = [];
+    }
+
+    async refreshPlaceholder() {
+        const wallet = await this.store.getWallet();
+        this.element.setAttribute("placeholder", `BE: ${wallet.ip}`);
+    }
+
+    async updateChampions() {
+        this.champions = await this.store.getNotOwnedChampions();
+        this.element.dispatchEvent(new Event("input"));
+    }
+
+    getSearchedChampions() {
+        const championSearchInputValue = this.element.value.toLowerCase();
+        return this.champions.filter(champion => champion.name.startsWith(championSearchInputValue));
+    }
+}
+
 async function setupElements(selector) {
     const gridHeader = document.querySelector(selector);
     if (!gridHeader || gridHeader.hasAttribute("shop-champion-select")) { return; }
@@ -99,9 +122,9 @@ async function setupElements(selector) {
         await sleep(500);
     }
 
-    const championSearchInput = gridHeader.querySelector(".champion-input");
-    updateInputPlaceholder(store, championSearchInput);
-    let champions = await store.getNotOwnedChampions();
+    const championSearchInput = new Input(".champion-input", store);
+    championSearchInput.refreshPlaceholder();
+    await championSearchInput.updateChampions();
 
     const icon = new Icon(store);
     gridHeader.appendChild(icon.element);
@@ -110,28 +133,28 @@ async function setupElements(selector) {
     icon.element.addEventListener("mouseleave", () => tooltip.hide());
     icon.element.addEventListener("mouseenter", () => tooltip.show(icon.element));
     icon.element.addEventListener("click", async () => {
-        await store.buyChampions(icon.champion);
-        updateInputPlaceholder(store, championSearchInput);
-        champions = await store.getNotOwnedChampions();
-        championSearchInput.dispatchEvent(new Event("input"));
+        const response = await store.buyChampions(icon.champion);
+        if (response.status === 200) {
+            championSearchInput.refreshPlaceholder();
+            championSearchInput.updateChampions();
+        }
     });
 
-    championSearchInput.addEventListener("keydown", async event => {
+    championSearchInput.element.addEventListener("keydown", async event => {
         if (event.key === "F5") {
-            champions = await store.getNotOwnedChampions();
-            championSearchInput.dispatchEvent(new Event("input"));
+            championSearchInput.refreshPlaceholder();
+            championSearchInput.updateChampions();
             console.debug("shop-champion-select: Refreshed champions");
         }
     });
 
-    championSearchInput.addEventListener("input", () => {
-        if (!championSearchInput.value) {
+    championSearchInput.element.addEventListener("input", () => {
+        if (!championSearchInput.element.value) {
             icon.hide();
             return;
         }
 
-        const championSearchInputValue = championSearchInput.value.toLowerCase();
-        const filteredChampions = champions.filter(champion => champion.name.startsWith(championSearchInputValue));
+        const filteredChampions = championSearchInput.getSearchedChampions();
 
         if (filteredChampions.length === 1) {
             icon.setChampion(...filteredChampions);
@@ -140,11 +163,6 @@ async function setupElements(selector) {
             icon.hide();
         }
     });
-}
-
-async function updateInputPlaceholder(store, input) {
-    const wallet = await store.getWallet();
-    input.setAttribute("placeholder", `BE: ${wallet.ip}`);
 }
 
 addEventListener("load", () => {

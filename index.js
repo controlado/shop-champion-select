@@ -100,10 +100,7 @@ async function setupElements(selector) {
     const tooltip = new Tooltip("right");
     icon.element.addEventListener("mouseleave", () => tooltip.hide());
     icon.element.addEventListener("mouseenter", () => tooltip.show(icon.element));
-    icon.element.addEventListener("click", async () => {
-        try { await store.buyChampions(icon.champion); }
-        catch (error) { sendChatNotification(error.response.data.message); }
-    });
+    icon.element.addEventListener("click", () => store.buyChampions(icon.champion)); // TODO: use `sendChatNotification`
 
     const champions = await store.getNotOwnedChampions();
     const championSearchInput = gridHeader.querySelector(".champion-input");

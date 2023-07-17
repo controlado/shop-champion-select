@@ -2,7 +2,7 @@
 
 # `🐧` Shop Champion Select <br>
 
-[![wakatime](https://wakatime.com/badge/user/89c5e1c8-9e67-43ef-bd0e-3ff9a4fde5e2/project/88cfd160-fb73-498c-9c64-8bd59b5869d1.svg)](https://wakatime.com/@programador/projects/ohrzmxpxdj)
+[![wakatime](https://wakatime.com/badge/github/controlado/shop-champion-select.svg)](https://wakatime.com/@programador/projects/oawnlyvwvw)
 [![discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=flat&logo=discord&logoColor=white&color=blue)](https://discordapp.com/users/854886148455399436) <br>
 ![languages](https://img.shields.io/badge/Documentation-gray)
 [![english](https://img.shields.io/badge/-English-blue)](README.md)

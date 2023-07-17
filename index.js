@@ -112,6 +112,8 @@ async function setupElements(selector) {
     icon.element.addEventListener("click", async () => {
         await store.buyChampions(icon.champion);
         updateInputPlaceholder(store, championSearchInput);
+        champions = await store.getNotOwnedChampions();
+        championSearchInput.dispatchEvent(new Event("input"));
     });
 
     championSearchInput.addEventListener("keydown", async event => {

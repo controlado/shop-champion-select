@@ -11,6 +11,8 @@
 Compre os campeões que precisa pela seleção de campeões! <br>
 Pesquise o campeão desejado, e clique no seu ícone para comprar :)
 
+<img src="https://github.com/controlado/shop-champion-select/assets/71716568/edc26255-d392-490f-9a09-a9bca8ff8589" width="700" alt="Plugin preview">
+
 </div>
 <br>
 

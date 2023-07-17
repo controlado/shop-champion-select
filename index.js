@@ -1,4 +1,4 @@
-import { layerManager, addRoutines, sleep, StoreBase, Champion, sendChatNotification, request } from "../controladoUtils";
+import { layerManager, addRoutines, sleep, StoreBase, Champion } from "../controladoUtils";
 import trans from "./trans.json";
 import "./assets/style.css";
 

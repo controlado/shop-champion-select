@@ -107,8 +107,8 @@ async function setupElements(selector) {
 
     championSearchInput.addEventListener("keydown", async event => {
         if (event.key === "F5") {
-            championSearchInput.value = "";
             champions = await store.getNotOwnedChampions();
+            championSearchInput.dispatchEvent(new Event("input"));
             console.debug("shop-champion-select: Refreshed champions");
         }
     });

@@ -121,8 +121,7 @@ async function setupElements(selector, attribute) {
     await store.wait(400);
 
     const championSearchInput = new Input(".champion-input", store);
-    championSearchInput.refreshPlaceholder();
-    await championSearchInput.updateChampions();
+    await Promise.all([championSearchInput.refreshPlaceholder(), championSearchInput.updateChampions()]);
 
     const icon = new Icon(store);
     gridHeader.appendChild(icon.element);

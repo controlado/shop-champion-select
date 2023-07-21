@@ -101,8 +101,9 @@ class Input {
     }
 
     async updateChampions() {
+        const newEvent = new Event("input");
         this.champions = await this.store.getNotOwnedChampions();
-        this.element.dispatchEvent(new Event("input"));
+        this.element.dispatchEvent(newEvent);
     }
 
     getSearchedChampions() {
@@ -111,11 +112,10 @@ class Input {
     }
 }
 
-async function setupElements(selector) {
+async function setupElements(selector, attribute) {
     const gridHeader = document.querySelector(selector);
-    if (!gridHeader || gridHeader.hasAttribute("shop-champion-select")) { return; }
-
-    gridHeader.setAttribute("shop-champion-select", "true");
+    if (!gridHeader || gridHeader.hasAttribute(attribute)) { return; }
+    gridHeader.setAttribute(attribute, "true");
 
     const store = new Store();
     await store.wait(400);
@@ -164,6 +164,6 @@ async function setupElements(selector) {
 }
 
 addEventListener("load", () => {
-    addRoutines(() => setupElements(".champion-grid-header"));
+    addRoutines(() => setupElements(".champion-grid-header", "shop-champion-select"));
     console.debug("shop-champion-select: Report bugs to Balaclava#1912");
 });

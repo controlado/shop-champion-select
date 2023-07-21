@@ -1,4 +1,4 @@
-import { layerManager, addRoutines, sleep, StoreBase, Champion } from "../controladoUtils";
+import { layerManager, addRoutines, linkEndpoint, StoreBase, Champion } from "../controladoUtils";
 import trans from "./trans.json";
 import "./assets/style.css";
 
@@ -129,35 +129,23 @@ async function setupElements(selector, attribute) {
     const tooltip = new Tooltip("right");
     icon.element.addEventListener("mouseleave", () => tooltip.hide());
     icon.element.addEventListener("mouseenter", () => tooltip.show(icon.element));
-    icon.element.addEventListener("click", async () => {
-        const response = await store.buyChampions(icon.champion);
-        if (response.status === 200) {
-            championSearchInput.refreshPlaceholder();
-            championSearchInput.updateChampions();
-        }
-    });
-
-    championSearchInput.element.addEventListener("keydown", event => {
-        if (event.key === "F5") {
-            championSearchInput.refreshPlaceholder();
-            championSearchInput.updateChampions();
-            console.debug("shop-champion-select: Refreshed champions");
-        }
-    });
+    icon.element.addEventListener("click", () => store.buyChampions(icon.champion));
 
     championSearchInput.element.addEventListener("input", () => {
-        if (!championSearchInput.element.value) {
-            icon.hide();
-            return;
-        }
-
         const filteredChampions = championSearchInput.getSearchedChampions();
-
         if (filteredChampions.length === 1) {
             icon.setChampion(...filteredChampions);
             icon.show();
         } else {
             icon.hide();
+        }
+    });
+
+    linkEndpoint("/lol-inventory/v1/wallet", (parsedEvent) => {
+        if (parsedEvent.eventType === "Update") {
+            championSearchInput.refreshPlaceholder();
+            championSearchInput.updateChampions();
+            console.debug("shop-champion-select: Refreshed champions");
         }
     });
 }

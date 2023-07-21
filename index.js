@@ -1,4 +1,4 @@
-import { layerManager, addRoutines, linkEndpoint, StoreBase, Champion } from "../controladoUtils";
+import { layerManager, addRoutines, linkEndpoint, StoreBase, Champion } from "../_controladoUtils";
 import trans from "./trans.json";
 import "./assets/style.css";
 

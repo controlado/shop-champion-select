@@ -19,7 +19,7 @@ Pesquise o campeão desejado, e clique no seu ícone para comprar :)
 ## Dependências
 
 [Pengu Loader 1.0.4](https://github.com/PenguLoader/PenguLoader) (ou qualquer versão superior) <br>
-[controladoUtils.js](https://github.com/controlado/pengu-plugins/blob/master/controladoUtils.js) (deve estar na pasta de plugins)
+[_controladoUtils.js](https://github.com/controlado/pengu-plugins/blob/master/_controladoUtils.js) (deve estar na pasta de plugins)
 
 ## Instalação
 
@@ -32,7 +32,7 @@ A estrutura deve ser algo parecida com isso:
 📂 Pengu Loader
 └── 📂 plugins
     ├── 📂 @default
-    ├── 📄 controladoUtils.js
+    ├── 📄 _controladoUtils.js
     └── 📂 shop-champion-select
         ├── 📄 trans.json
         ├── 📄 index.js

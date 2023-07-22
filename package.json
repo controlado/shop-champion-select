@@ -31,16 +31,13 @@
     "url": "https://github.com/controlado/shop-champion-select/issues"
   },
   "homepage": "https://github.com/controlado/shop-champion-select#readme",
-  "dependencies": {
-    "balaclava-utils": "^1.0.0"
-  },
   "devDependencies": {
-    "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4",
-    "css-loader": "^6.8.1",
     "copy-webpack-plugin": "^11.0.0",
-    "mini-css-extract-plugin": "^2.7.6",
+    "css-loader": "^6.8.1",
     "css-minimizer-webpack-plugin": "^5.0.1",
-    "json-minimizer-webpack-plugin": "^4.0.0"
+    "json-minimizer-webpack-plugin": "^4.0.0",
+    "mini-css-extract-plugin": "^2.7.6",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
   }
 }

@@ -15,8 +15,12 @@ const banner = `/**
  */`;
 
 module.exports = {
+    experiments: {
+        outputModule: true,
+    },
     output: {
         filename: "index.js",
+        module: true
     },
     plugins: [
         new CopyPlugin({

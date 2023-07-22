@@ -1,7 +1,7 @@
 name: Criar nova release
 
 env:
-  plugin_name: "shop-champion-select"
+  plugin_name: shop-champion-select
 
 on:
   workflow_dispatch:

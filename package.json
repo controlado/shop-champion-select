@@ -1,6 +1,6 @@
 {
   "name": "shop-champion-select",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Buy champions inside Champion Select! 🐧",
   "author": "balaclava <yangabrielogy@gmail.com>",
   "repository": {
@@ -8,7 +8,7 @@
     "url": "git+https://github.com/controlado/shop-champion-select.git"
   },
   "license": "GPL-3.0-or-later",
-  "main": "index.js",
+  "main": "./src/index.js",
   "files": [
     "./src/index.js",
     "./src/trans.json",

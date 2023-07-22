@@ -3,8 +3,8 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-const pkg = require("./package.json");
 
+const pkg = require("./package.json");
 const banner = `/**
  * @author ${pkg.author}
  * @name ${pkg.name}
@@ -15,13 +15,8 @@ const banner = `/**
  */`;
 
 module.exports = {
-    experiments: {
-        outputModule: true,
-    },
-    output: {
-        filename: "index.js",
-        module: true
-    },
+    output: { filename: "index.js" },
+    experiments: { outputModule: true },
     plugins: [
         new CopyPlugin({
             patterns: [
@@ -31,12 +26,9 @@ module.exports = {
                 }
             ],
         }),
-        new MiniCssExtractPlugin(
-            {
-                filename: "assets/style.css",
-
-            }
-        )
+        new MiniCssExtractPlugin({
+            filename: "assets/style.css",
+        })
     ],
     optimization: {
         minimizer: [
@@ -57,14 +49,7 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/i,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    "css-loader"
-                ],
-            },
-            {
-                test: /\.json$/i,
-                type: "json",
+                use: [MiniCssExtractPlugin.loader, "css-loader"],
             },
         ],
     },

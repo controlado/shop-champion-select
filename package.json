@@ -1,6 +1,6 @@
 {
   "name": "shop-champion-select",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Buy champions inside Champion Select! 🐧",
   "author": "balaclava <yangabrielogy@gmail.com>",
   "repository": {
@@ -10,9 +10,9 @@
   "license": "GPL-3.0-or-later",
   "main": "index.js",
   "files": [
-    "./index.js",
-    "./trans.json",
-    "./assets/**/*",
+    "./src/index.js",
+    "./src/trans.json",
+    "./src/assets/**/*",
     "./package.json",
     "./README.md",
     "./README.br.md"

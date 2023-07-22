@@ -26,5 +26,6 @@ jobs:
         with:
           name: ${{ env.plugin_name }} v${{ github.run_number }}
           tag_name: v${{ github.run_number }}
+          files: ${{ env.plugin_name }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

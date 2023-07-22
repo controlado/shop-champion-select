@@ -1,4 +1,5 @@
 name: Criar nova release
+
 env:
   plugin_name: "shop-champion-select"
 
@@ -7,16 +8,16 @@ on:
   repository_dispatch:
   push:
     paths:
-      - "index.js"
-      - "README.md"
-      - "README.br.md"
+      - index.js
+      - README.md
+      - README.br.md
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Zipando o plugin
         run: zip -r ${{ env.plugin_name }}.zip index.js README.md README.br.md

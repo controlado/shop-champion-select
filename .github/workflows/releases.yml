@@ -15,8 +15,14 @@ jobs:
   zip:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: zip -r ${{ env.plugin_name }}.zip index.js README.md README.br.md
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Zipando os arquivos do plugin
+        run: zip -r ${{ env.plugin_name }}.zip index.js README.md README.br.md
+
+      - name: Mostrar o conteúdo do diretório para depuração
+        run: ls -al
 
   release:
     needs: zip

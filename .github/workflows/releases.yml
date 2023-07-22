@@ -6,6 +6,8 @@ on:
     paths-ignore:
       - "**.md"
       - "**.yml"
+      - "package.json"
+      - "package-lock.json"
 
 env:
   PLUGIN_NAME: "shop-champion-select"

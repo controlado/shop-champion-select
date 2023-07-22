@@ -1,28 +1,27 @@
-name: Criar Release
+name: Criar nova release
+env:
+  plugin_name: "shop-champion-select"
 
 on:
+  workflow_dispatch:
   repository_dispatch:
   push:
-    paths-ignore:
-      - "**.md"
-      - "**.yml"
-      - "package.json"
-      - "package-lock.json"
-
-env:
-  PLUGIN_NAME: "shop-champion-select"
+    paths:
+      - "index.js"
+      - "README.md"
+      - "README.br.md"
 
 jobs:
-  release:
+  zip:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - run: zip -r ${{ env.plugin_name }}.zip index.js README.md README.br.md
 
-      - name: Zipando o plugin
-        run: zip -r ${{ env.PLUGIN_NAME }}.zip index.js README.md README.br.md
-
+  release:
+    needs: zip
+    runs-on: ubuntu-latest
+    steps:
       - name: Criando a release
         uses: actions/create-release@v1
         id: create_release
@@ -30,7 +29,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: v${{ github.run_number }}
-          release_name: ${{ env.PLUGIN_NAME }} v${{ github.run_number }}
+          release_name: ${{ env.plugin_name }} v${{ github.run_number }}
           draft: false
           prerelease: false
 
@@ -40,6 +39,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./${{ env.PLUGIN_NAME }}.zip
-          asset_name: ${{ env.PLUGIN_NAME }}.zip
+          asset_path: ${{ env.plugin_name }}.zip
+          asset_name: ${{ env.plugin_name }}.zip
           asset_content_type: application/zip

@@ -1,4 +1,4 @@
-import { layerManager, addRoutines, linkEndpoint, request, StoreBase, Champion } from "https://cdn.skypack.dev/balaclava-utils-01@latest";
+import { layerManager, addRoutines, linkEndpoint, request, StoreBase, Champion } from "https://cdn.skypack.dev/balaclava-utils@latest";
 import trans from "./trans.json";
 import "./assets/style.css";
 

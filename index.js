@@ -1,4 +1,4 @@
-import { layerManager, addRoutines, linkEndpoint, StoreBase, Champion } from "../_controladoUtils";
+import { layerManager, addRoutines, linkEndpoint, request, StoreBase, Champion } from "../_controladoUtils";
 import trans from "./trans.json";
 import "./assets/style.css";
 
@@ -15,11 +15,6 @@ class Store extends StoreBase {
         return response.data.catalog
             .filter(champion => !champion.owned)
             .map(champion => ({ ...champion, name: champion.name.toLowerCase() }));
-    }
-
-    async getWallet() {
-        const { data } = await this.request("GET", "/storefront/v3/view/misc");
-        return { ip: data.player.ip, rp: data.player.rp };
     }
 }
 
@@ -96,8 +91,10 @@ class Input {
     }
 
     async refreshPlaceholder() {
-        const wallet = await this.store.getWallet();
-        this.element.setAttribute("placeholder", `BE: ${wallet.ip}`);
+        const response = await request("GET", "/lol-inventory/v1/wallet/lol_blue_essence");
+        const { lol_blue_essence } = await response.json(); // TODO: Encapsulate this
+
+        this.element.setAttribute("placeholder", `BE: ${lol_blue_essence}`);
     }
 
     async updateChampions() {

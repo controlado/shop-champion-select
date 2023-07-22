@@ -17,24 +17,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout do repositório
+      - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Criar pasta de arquivos do repositório
-        run: mkdir ${{ env.PLUGIN_NAME }}
+      - name: Zipando o plugin
+        run: zip -r ${{ env.PLUGIN_NAME }}.zip index.js README.md README.br.md
 
-      - name: Mover arquivos do repositório para a pasta criada
-        run: find . -maxdepth 1 ! -name "." ! -name ".git" ! -name ".github" -exec mv {} ${{ env.PLUGIN_NAME }}/ \;
-
-      - name: Baixar arquivo de dependência
-        run: curl -o _controladoUtils.js https://raw.githubusercontent.com/controlado/pengu-plugins/master/_controladoUtils.js
-
-      - name: Criar arquivo ZIP
-        run: zip -r ${{ env.PLUGIN_NAME }}.zip _controladoUtils.js ${{ env.PLUGIN_NAME }}/
-
-      - name: Criar Release
-        id: create_release
+      - name: Criando a release
         uses: actions/create-release@v1
+        id: create_release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -43,7 +34,7 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Adicionar arquivo ZIP à Release
+      - name: Subindo nova versão
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

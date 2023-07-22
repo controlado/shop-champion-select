@@ -12,39 +12,19 @@ on:
       - "README.br.md"
 
 jobs:
-  zip:
+  release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: "Checkout"
         uses: actions/checkout@v2
 
-      - name: Zipando os arquivos do plugin
+      - name: "Zipando o plugin"
         run: zip -r ${{ env.plugin_name }}.zip index.js README.md README.br.md
 
-      - name: Mostrar o conteúdo do diretório para depuração
-        run: ls -al
-
-  release:
-    needs: zip
-    runs-on: ubuntu-latest
-    steps:
       - name: Criando a release
-        uses: actions/create-release@v1
-        id: create_release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
+          name: ${{ env.plugin_name }} v${{ github.run_number }}
           tag_name: v${{ github.run_number }}
-          release_name: ${{ env.plugin_name }} v${{ github.run_number }}
-          draft: false
-          prerelease: false
-
-      - name: Subindo nova versão
-        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ env.plugin_name }}.zip
-          asset_name: ${{ env.plugin_name }}.zip
-          asset_content_type: application/zip

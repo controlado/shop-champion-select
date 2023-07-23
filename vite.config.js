@@ -17,12 +17,6 @@ export default defineConfig({
             output: {
                 manualChunks: undefined,
                 entryFileNames: "index.js",
-                assetFileNames: (assetInfo) => {
-                    if (assetInfo.name.endsWith(".css")) {
-                        return "assets/style.css";
-                    }
-                    return assetInfo.name;
-                },
             }
         },
     },

@@ -12,18 +12,18 @@ const banner = `/**
 
 export default defineConfig({
     build: {
-        emptyOutDir: true,
         rollupOptions: {
             input: "src/index.js",
             output: {
                 manualChunks: undefined,
-                assetFileNames: "assets/[name][extname]",
-                chunkFileNames: "assets/[name].js",
-                entryFileNames: "[name].js",
-                globals: {
-                    "https://cdn.skypack.dev/balaclava-utils@latest": "balaclavaUtils",
-                }
-            },
+                entryFileNames: "index.js",
+                assetFileNames: (assetInfo) => {
+                    if (assetInfo.name.endsWith(".css")) {
+                        return "assets/style.css";
+                    }
+                    return assetInfo.name;
+                },
+            }
         },
     },
     esbuild: {

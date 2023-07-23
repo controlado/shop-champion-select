@@ -1,5 +1,6 @@
 import { layerManager, addRoutines, addCssLink, linkEndpoint, request, StoreBase, Champion } from "https://cdn.skypack.dev/balaclava-utils@latest";
 import trans from "./trans.json"; // If you want to help me translate this, please open a PR! :)
+import "./assets/style.css";
 
 /**
  * @author balaclava

@@ -23,6 +23,9 @@ export default defineConfig({
                 assetFileNames: "assets/[name][extname]",
                 chunkFileNames: "assets/[name].js",
                 entryFileNames: "[name].js",
+                globals: {
+                    "https://cdn.skypack.dev/balaclava-utils@latest": "balaclavaUtils",
+                }
             },
         },
     },

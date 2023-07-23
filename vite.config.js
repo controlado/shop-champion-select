@@ -13,11 +13,8 @@ const banner = `/**
 export default defineConfig({
     build: {
         emptyOutDir: true,
-        lib: {
-            entry: "src/index.js",
-            name: "shop-champion-select",
-        },
         rollupOptions: {
+            input: "src/index.js",
             output: {
                 manualChunks: undefined,
                 assetFileNames: "assets/[name][extname]",

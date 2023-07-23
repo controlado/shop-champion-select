@@ -26,9 +26,6 @@ module.exports = {
                 }
             ],
         }),
-        new MiniCssExtractPlugin({
-            filename: "assets/style.css",
-        })
     ],
     optimization: {
         minimizer: [
@@ -49,7 +46,7 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, "css-loader"],
+                use: ["css-loader"],
             },
         ],
     },

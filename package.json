@@ -1,6 +1,6 @@
 {
   "name": "shop-champion-select",
-  "version": "6.5.2",
+  "version": "6.5.3",
   "description": "Buy champions inside Champion Select! 🐧",
   "author": "balaclava",
   "repository": {
@@ -10,10 +10,7 @@
   "license": "GPL-3.0-or-later",
   "main": "./dist/index.js",
   "files": [
-    "./dist/**/*",
-    "./README.md",
-    "./README.br.md",
-    "./package.json"
+    "dist"
   ],
   "keywords": [
     "pengu-loader",

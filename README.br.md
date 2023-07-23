@@ -19,7 +19,7 @@ Pesquise o campeão desejado, e clique no seu ícone para comprar :)
 ## Dependências
 
 [Pengu Loader 1.0.4](https://github.com/PenguLoader/PenguLoader) (ou qualquer versão superior) <br>
-[utils.js](https://github.com/controlado/pengu-plugins/blob/master/_controladoUtils.js) (incluso automaticamente)
+[controladoUtils.js](https://github.com/controlado/pengu-plugins/blob/master/_controladoUtils.js) (incluso automaticamente)
 
 ## Instalação
 

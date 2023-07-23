@@ -19,7 +19,7 @@ Search for the desired champion, and click on its icon to buy :)
 ## Dependencies
 
 [Pengu Loader 1.0.4](https://github.com/PenguLoader/PenguLoader) (or any higher version) <br>
-[utils.js](https://github.com/controlado/pengu-plugins/blob/master/_controladoUtils.js) (automatically included)
+[controladoUtils.js](https://github.com/controlado/pengu-plugins) (automatically included)
 
 ## Installation
 

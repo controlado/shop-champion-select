@@ -127,6 +127,27 @@ async function setupElements(selector, attribute) {
     icon.element.addEventListener("mouseleave", () => tooltip.hide());
     icon.element.addEventListener("mouseenter", () => tooltip.show(icon.element));
     icon.element.addEventListener("click", () => store.buyChampions(icon.champion));
+    icon.element.addEventListener("contextmenu", async () => {
+        const buyResponse = await store.buyChampions(icon.champion);
+        if (!buyResponse.ok) {
+            return;
+        }
+
+        const sessionResponse = await request("GET", "/lol-champ-select/v1/session");
+        const { localPlayerCellId, actions } = await sessionResponse.json();
+
+        for (const action of actions) {
+            for (const subAction of action) {
+                if (subAction.completed === false && subAction.actorCellId === localPlayerCellId) {
+                    const body = { championId: icon.champion.id, completed: false };
+                    const selectResponse = await request("PATCH", `/lol-champ-select/v1/session/actions/${subAction.id}`, { body });
+                    if (selectResponse.ok) {
+                        return;
+                    }
+                }
+            }
+        }
+    });
 
     championSearchInput.element.addEventListener("input", () => {
         const filteredChampions = championSearchInput.getSearchedChampions();

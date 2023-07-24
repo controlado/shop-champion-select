@@ -1,8 +1,8 @@
 {
     "missing": "en",
     "tooltip": {
-        "pt": "Comprar campeão...",
-        "es": "Comprar campeón...",
-        "en": "Buy champion..."
+        "pt": "Botão esquerdo: compra o campeão\nBotão direito: compra e seleciona o campeão",
+        "es": "Botón izquierdo: compra el campeón\nBotón derecho: compra y selecciona el campeón",
+        "en": "Left click: buy the champion\nRight click: buy and select the champion"
     }
 }

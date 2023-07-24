@@ -131,11 +131,12 @@ async function setupElements(selector, attribute) {
     icon.element.addEventListener("contextmenu", async () => {
         const buyResponse = await store.buyChampions(icon.champion);
         if (buyResponse.status !== 200) {
-            console.debug("shop-champion-select(buy): error", buyResponse);
+            const buyData = await buyResponse.json();
+            console.debug("shop-champion-select(buy): error", buyResponse, buyData);
             return;
         }
 
-        await sleep(1000); // o campeão não fica imediatamente disponível
+        await sleep(2000); // o campeão não fica imediatamente disponível
         const sessionResponse = await request("GET", "/lol-champ-select/v1/session");
         const { localPlayerCellId, actions } = await sessionResponse.json();
 
@@ -147,7 +148,7 @@ async function setupElements(selector, attribute) {
                     if (selectResponse.ok) { return; }
                     else {
                         const selectData = await selectResponse.json();
-                        console.debug("shop-champion-select(select): error", selectData);
+                        console.debug("shop-champion-select(select): error", selectResponse, selectData);
                     }
                 }
             }

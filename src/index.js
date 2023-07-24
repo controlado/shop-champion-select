@@ -1,4 +1,4 @@
-import { layerManager, addRoutines, addCssLink, linkEndpoint, request, StoreBase, Champion } from "https://cdn.skypack.dev/balaclava-utils@latest";
+import { layerManager, addRoutines, linkEndpoint, request, StoreBase, Champion } from "https://cdn.skypack.dev/balaclava-utils@latest";
 import trans from "./trans.json"; // If you want to help me translate this, please open a PR! :)
 import "./assets/style.css";
 
@@ -148,7 +148,6 @@ async function setupElements(selector, attribute) {
 }
 
 addEventListener("load", () => {
-    addCssLink("https://cdn.skypack.dev/shop-champion-select@latest/dist/assets/index.css");
     addRoutines(() => setupElements(".champion-grid-header", "shop-champion-select"));
     console.debug("shop-champion-select: Report bugs to Balaclava#1912");
 });

@@ -1,3 +1,4 @@
+import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 import { defineConfig } from "vite";
 import pkg from "./package.json";
 
@@ -11,6 +12,7 @@ const banner = `/**
  */`;
 
 export default defineConfig({
+    plugins: [cssInjectedByJsPlugin()],
     build: {
         rollupOptions: {
             input: "src/index.js",

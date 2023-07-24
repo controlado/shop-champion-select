@@ -1,4 +1,5 @@
-import { layerManager, addRoutines, linkEndpoint, request, StoreBase, Champion } from "https://cdn.skypack.dev/balaclava-utils@latest";
+import { sleep, layerManager, addRoutines, linkEndpoint, request, StoreBase, Champion } from "https://cdn.skypack.dev/balaclava-utils@latest";
+import { version } from "../package.json";
 import trans from "./trans.json"; // If you want to help me translate this, please open a PR! :)
 import "./assets/style.css";
 
@@ -134,7 +135,7 @@ async function setupElements(selector, attribute) {
             return;
         }
 
-        console.debug("shop-champion-select(select): trying to select champion");
+        await sleep(1000); // o campeão não fica imediatamente disponível
         const sessionResponse = await request("GET", "/lol-champ-select/v1/session");
         const { localPlayerCellId, actions } = await sessionResponse.json();
 
@@ -143,8 +144,10 @@ async function setupElements(selector, attribute) {
                 if (subAction.completed === false && subAction.actorCellId === localPlayerCellId) {
                     const body = { championId: icon.champion.id, completed: false };
                     const selectResponse = await request("PATCH", `/lol-champ-select/v1/session/actions/${subAction.id}`, { body });
-                    if (selectResponse.ok) {
-                        return;
+                    if (selectResponse.ok) { return; }
+                    else {
+                        const selectData = await selectResponse.json();
+                        console.debug("shop-champion-select(select): error", selectData);
                     }
                 }
             }
@@ -172,5 +175,5 @@ async function setupElements(selector, attribute) {
 
 addEventListener("load", () => {
     addRoutines(() => setupElements(".champion-grid-header", "shop-champion-select"));
-    console.debug("shop-champion-select: Report bugs to Balaclava#1912");
+    console.debug(`shop-champion-select(${version}): Report bugs to Balaclava#1912`);
 });

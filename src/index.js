@@ -129,10 +129,12 @@ async function setupElements(selector, attribute) {
     icon.element.addEventListener("click", () => store.buyChampions(icon.champion));
     icon.element.addEventListener("contextmenu", async () => {
         const buyResponse = await store.buyChampions(icon.champion);
-        if (!buyResponse.ok) {
+        if (buyResponse.status !== 200) {
+            console.debug("shop-champion-select(buy): error", buyResponse);
             return;
         }
 
+        console.debug("shop-champion-select(select): trying to select champion");
         const sessionResponse = await request("GET", "/lol-champ-select/v1/session");
         const { localPlayerCellId, actions } = await sessionResponse.json();
 

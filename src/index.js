@@ -74,7 +74,7 @@ class Tooltip {
 
     show(receiver) {
         const rect = receiver.getBoundingClientRect();
-        this.element.style.top = `${rect.top + rect.height - 38}px`;
+        this.element.style.top = `${rect.top + rect.height - 46}px`;
         this.element.style.left = `${rect.left + rect.width}px`;
         layerManager.appendChild(this.element);
     }

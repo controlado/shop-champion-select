@@ -1,4 +1,4 @@
-import { sleep, layerManager, addRoutines, linkEndpoint, request, StoreBase, Champion } from "https://cdn.skypack.dev/balaclava-utils@latest";
+import { sleep, layerManager, addRoutines, linkEndpoint, request, StoreBase, Champion } from "https://cdn.jsdelivr.net/npm/balaclava-utils@latest";
 import { version } from "../package.json";
 import trans from "./trans.json"; // If you want to help me translate this, please open a PR! :)
 import "./assets/style.css";

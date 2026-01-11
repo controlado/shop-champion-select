@@ -5,4 +5,4 @@
  * @description Buy champions inside Champion Select! 🐧
  */
 
-import "https://cdn.skypack.dev/shop-champion-select@latest?min";
+import "https://cdn.jsdelivr.net/npm/shop-champion-select@latest?min";
